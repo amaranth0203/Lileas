@@ -31,9 +31,9 @@ function essay( response ) {
     { timeout : 100 , maxBuffer : 20000*1024 } ,
     function ( error , stdout , stderr ) {
       response.writeHead( 200 , { "Content-Type" : "text/html;charset=utf-8" } ) ;
-      response.write( "<a href='/completion'>completion</a>" +
+      response.write( "<a href='/completion'>completion</a><br/>" +
                       stdout +
-                      "<a href='/completion'>completion</a>" ) ;
+                      "<br/><a href='/completion'>completion</a>" ) ;
       response.end( ) ;
     });
 
@@ -47,9 +47,9 @@ function completion( response ) {
     { timeout : 100 , maxBuffer : 20000*1024 } ,
     function ( error , stdout , stderr ) {
       response.writeHead( 200 , { "Content-Type" : "text/html;charset=utf-8" } ) ;
-      response.write( "<a href='/essay'>essay</a>" + 
+      response.write( "<a href='/essay'>essay</a><br/>" + 
                       stdout +
-                      "<a href='/essay'>essay</a>" ) ;
+                      "<br/><a href='/essay'>essay</a>" ) ;
       response.end( ) ;
     });
 
