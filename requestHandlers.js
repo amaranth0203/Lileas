@@ -1,4 +1,4 @@
-var exec = require( "child_process" ).exec ;
+﻿var exec = require( "child_process" ).exec ;
 
 function start( response ) {
   console.log( "Request handler 'start' was called." ) ;
@@ -7,8 +7,11 @@ function start( response ) {
   exec( "find /" , 
     { timeout : 100 , maxBuffer : 20000*1024 } ,
     function ( error , stdout , stderr ) {
-      response.writeHead( 200 , { "Content-Type" : "text/plain" } ) ;
-      response.write( stdout ) ;
+      response.writeHead( 200 , { "Content-Type" : "text/html" } ) ;
+//      response.write( stdout ) ;
+      response.write( "<a href='/essay'>essay</a>" +
+                      "<br/>" +
+                      "<a href='/completion'>completion</a>" ) ;
       response.end( ) ;
     });
 
@@ -20,6 +23,36 @@ function upload( response ) {
   response.write( "Hello Upload" ) ;
   response.end( ) ;
 }
+function essay( response ) {
+  console.log( "Request handler 'start' was called." ) ;
+  var content = "empty" ;
+
+  exec( "cat essay.txt" , 
+    { timeout : 100 , maxBuffer : 20000*1024 } ,
+    function ( error , stdout , stderr ) {
+      response.writeHead( 200 , { "Content-Type" : "text/plain" } ) ;
+      response.write( stdout ) ;
+      response.end( ) ;
+    });
+
+  return content ;
+}
+function completion( response ) {
+  console.log( "Request handler 'start' was called." ) ;
+  var content = "empty" ;
+
+  exec( "cat completion.txt" , 
+    { timeout : 100 , maxBuffer : 20000*1024 } ,
+    function ( error , stdout , stderr ) {
+      response.writeHead( 200 , { "Content-Type" : "text/plain" } ) ;
+      response.write( stdout ) ;
+      response.end( ) ;
+    });
+
+  return content ;
+}
 
 exports.start = start ;
 exports.upload = upload ;
+exports.essay = essay ;
+exports.completion = completion ;
