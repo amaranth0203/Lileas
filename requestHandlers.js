@@ -30,7 +30,7 @@ function essay( response ) {
   exec( "cat essay.txt" , 
     { timeout : 100 , maxBuffer : 20000*1024 } ,
     function ( error , stdout , stderr ) {
-      response.writeHead( 200 , { "Content-Type" : "text/plain" } ) ;
+      response.writeHead( 200 , { "Content-Type" : "text/html;charset=utf-8" } ) ;
       response.write( "<a href='/completion'>completion</a>" +
                       stdout +
                       "<a href='/completion'>completion</a>" ) ;
@@ -46,7 +46,7 @@ function completion( response ) {
   exec( "cat completion.txt" , 
     { timeout : 100 , maxBuffer : 20000*1024 } ,
     function ( error , stdout , stderr ) {
-      response.writeHead( 200 , { "Content-Type" : "text/plain" } ) ;
+      response.writeHead( 200 , { "Content-Type" : "text/html;charset=utf-8" } ) ;
       response.write( "<a href='/essay'>essay</a>" + 
                       stdout +
                       "<a href='/essay'>essay</a>" ) ;
