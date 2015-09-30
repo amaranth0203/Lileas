@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="APP">
+<head>
+    <meta charset="UTF-8">
+    <title>angular file upload</title>
+</head>
+
+<body>
+        <form method='post' action='upload' enctype="multipart/form-data">
+        <input type='file' name='fileUploaded'>
+        <input type='submit'>
+
+
+        <canvas id="canvas" style="width:100px; height:100px" width="5" height="5"></canvas>
+        <script>
+            var canvas = document.getElementById("canvas");
+            var context = canvas.getContext("2d");
+            //Background
+            context.fillStyle = "#000";
+            context.fillRect(0, 0, canvas.width, canvas.height);
+            canvas.addEventListener("click", function(e) {
+                var x = Math.floor(e.x * canvas.width / parseInt(canvas.style.width));
+                var y = Math.floor(e.y * canvas.height / parseInt(canvas.style.height));
+                //Zoomed in red 'square'
+                context.fillStyle = "#F00";
+                context.fillRect(x, y, 1, 1);
+            }, true);
+        </script>
+ </body>
+</html>
