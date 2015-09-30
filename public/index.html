@@ -10,20 +10,20 @@
         <input type='file' name='fileUploaded'>
         <input type='submit'>
 
-
-        <canvas id="canvas" style="width:100px; height:100px" width="5" height="5"></canvas>
+        <br/>
+        <canvas id="canvas" style="width:100px; height:100px" ></canvas>
         <script>
             var canvas = document.getElementById("canvas");
             var context = canvas.getContext("2d");
             //Background
             context.fillStyle = "#000";
             context.fillRect(0, 0, canvas.width, canvas.height);
+            context.fillStyle = 'rgba(255, 0, 0, 1)';
+            // draw a 1x1 Rectangle at (7,3)
+            context.fillRect(7,3, 1,1);
             canvas.addEventListener("click", function(e) {
                 var x = Math.floor(e.x * canvas.width / parseInt(canvas.style.width));
                 var y = Math.floor(e.y * canvas.height / parseInt(canvas.style.height));
-                //Zoomed in red 'square'
-                context.fillStyle = "#F00";
-                context.fillRect(x, y, 1, 1);
             }, true);
         </script>
  </body>

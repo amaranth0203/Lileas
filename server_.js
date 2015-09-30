@@ -42,7 +42,10 @@ app.route('/upload').post(function (req, res, next) {
 
         res.writeHead(200, {'content-type': 'image/jpeg'});
         fs.readFile( './img/'+files.fileUploaded.name , function( err , data ) {
-            if( err ) throw err ;
+            if( err ) {
+                console.log( err.message ) ;
+                return ;
+            }
             res.write( data ) ;
             res.end( ) ;
         }) ;
