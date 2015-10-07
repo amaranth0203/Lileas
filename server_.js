@@ -25,7 +25,7 @@ app.get('/test', function(req, res, next) {
     });
     // res.write( json ) ;
     // res.end( );
-    fs.readFile( './img/3l8.raw' , function( err , data ) {
+    fs.readFile( './img/test.raw' , function( err , data ) {
         if( err ) throw err ;
         res.write( data ) ;
         res.end( ) ;
