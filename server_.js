@@ -8,11 +8,30 @@ var fs = require('fs') ;
 
 var app = express();
 app.use(express.static(path.join(__dirname, 'public')));
-
 /* ========================================================== 
  bodyParser() required to allow Express to see the uploaded files
 ============================================================ */
 app.use(bodyParser({defer: true}));
+
+
+app.get('/test', function(req, res, next) {
+    res.writeHead(200,{"Content-Type":"text/plain","Access-Control-Allow-Origin":"http://localhost"});
+    var otherArray = ["item1", "item2"];
+    var otherObject = { item1: "item1val", item2: "item2val" };
+    var json = JSON.stringify({ 
+        anObject: otherObject, 
+        anArray: otherArray, 
+        another: "item"
+    });
+    // res.write( json ) ;
+    // res.end( );
+    fs.readFile( './img/3l8.raw' , function( err , data ) {
+        if( err ) throw err ;
+        res.write( data ) ;
+        res.end( ) ;
+    }) ;
+});
+
 app.route('/upload').post(function (req, res, next) {
 
     var form = new formidable.IncomingForm();

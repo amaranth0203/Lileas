@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="APP">
+<head>
+    <meta charset="UTF-8">
+    <title>angular file upload</title>
+
+    <script type="text/javascript">
+        function GetData(){
+            var xhr=new XMLHttpRequest();
+            xhr.open("GET","http://localhost:3031/test",true);
+            xhr.onreadystatechange=function(){
+                if(xhr.readyState==4){
+                    if(xhr.status==200){
+                        //document.getElementById("res").innerHTML=xhr.responseText;
+                        //window.aaa = JSON.parse(xhr.responseText) ;
+                        window.aaa = xhr.responseText ;
+                    }
+                }
+            }
+            xhr.send(null);
+            alert( 'GetData() called' ) ;
+        }
+        window.onload = GetData ;
+    </script>
+
+</head>
+
+<body>
+        <canvas id="canvas" 
+        style="width:100px; height:100px" 
+        width="100" height="100"></canvas>
+        <script>
+            var canvas = document.getElementById("canvas");
+            var context = canvas.getContext("2d");
+            // context.fillStyle = "#000";
+            context.fillRect(0, 0, canvas.width, canvas.height);
+            context.fillStyle = 'rgba(0, 255, 0, 1)';
+            // draw a 1x1 Rectangle at (7,3)
+            context.fillRect( 7,3 , 1,1 );
+            context.fillRect(45,45, 10,10);
+            // canvas.addEventListener("click", function(e) {
+                // var x = Math.floor(e.x * canvas.width / parseInt(canvas.style.width));
+                // var y = Math.floor(e.y * canvas.height / parseInt(canvas.style.height));
+            // }, true);
+            document.write("<br/>")
+            document.write(canvas.width)
+            document.write(canvas.height)
+            document.write("<br/>")
+            document.write( document.session )
+        </script>
+<!-- 
+<br/><br/>
+<input type="button" value="getdata" onclick="GetData()" />
+<div id="res">dsdf</div>
+ -->
+ </body>
+</html>
