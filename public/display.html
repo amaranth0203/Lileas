@@ -11,14 +11,34 @@
             xhr.onreadystatechange=function(){
                 if(xhr.readyState==4){
                     if(xhr.status==200){
+                        alert( 'GetData() called' ) ;
                         //document.getElementById("res").innerHTML=xhr.responseText;
-                        //window.aaa = JSON.parse(xhr.responseText) ;
-                        window.aaa = xhr.responseText ;
+                        window.rawImage = JSON.parse(xhr.responseText) ;
+                        //window.aaa = xhr.responseText ;
+                        var canvas = document.getElementById("canvas");
+                        canvas.width = window.rawImage.width ;
+                        canvas.height = window.rawImage.height ;
+                        canvas.style = "width:"+window.rawImage.width+"px; height:"+window.rawImage.height+"px" ;
+                        var context = canvas.getContext("2d");
+                        context.fillRect(0, 0, canvas.width, canvas.height);
+                        var i , j ;
+                        for( i = 0 ; i < window.rawImage.height ; i ++ ) {
+                            for( j = 0 ; j < window.rawImage.width ; j ++ ) {
+                                context.fillStyle = 'rgba(255, 255, 255, ' + 1.0*window.rawImage.rawData[i*window.rawImage.width+j]/1024 + ')';
+                                context.fillRect( j,i , 1,1 );
+                            }
+                        }
+
+            // context.fillStyle = 'rgba(255, 255, 255, 1)';
+            // context.fillRect(45,45, 10,10);
+            // context.fillStyle = 'rgba(255, 255, 255, 0.8)';
+            // context.fillRect(55,45, 10,10);
+            // context.fillStyle = 'rgba(255, 255, 255, 0.6)';
+            // context.fillRect(65,45, 10,10);
                     }
                 }
             }
             xhr.send(null);
-            alert( 'GetData() called' ) ;
         }
         window.onload = GetData ;
     </script>
@@ -30,23 +50,30 @@
         style="width:100px; height:100px" 
         width="100" height="100"></canvas>
         <script>
-            var canvas = document.getElementById("canvas");
-            var context = canvas.getContext("2d");
+            // var canvas = document.getElementById("canvas");
+            // var context = canvas.getContext("2d");
             // context.fillStyle = "#000";
-            context.fillRect(0, 0, canvas.width, canvas.height);
-            context.fillStyle = 'rgba(0, 255, 0, 1)';
+            // context.fillRect(0, 0, canvas.width, canvas.height);
             // draw a 1x1 Rectangle at (7,3)
-            context.fillRect( 7,3 , 1,1 );
-            context.fillRect(45,45, 10,10);
+            // context.fillRect( 7,3 , 1,1 );
+
+            // context.fillStyle = 'rgba(255, 255, 255, 1)';
+            // context.fillRect(45,45, 10,10);
+            // context.fillStyle = 'rgba(255, 255, 255, 0.8)';
+            // context.fillRect(55,45, 10,10);
+            // context.fillStyle = 'rgba(255, 255, 255, 0.6)';
+            // context.fillRect(65,45, 10,10);
             // canvas.addEventListener("click", function(e) {
                 // var x = Math.floor(e.x * canvas.width / parseInt(canvas.style.width));
                 // var y = Math.floor(e.y * canvas.height / parseInt(canvas.style.height));
             // }, true);
-            document.write("<br/>")
-            document.write(canvas.width)
-            document.write(canvas.height)
-            document.write("<br/>")
-            document.write( document.session )
+
+            // document.write("<br/>")
+            // document.write(canvas.width)
+            // document.write(canvas.height)
+            // document.write("<br/>")
+            // document.write( document.session )
+
         </script>
 <!-- 
 <br/><br/>

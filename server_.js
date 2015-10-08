@@ -16,20 +16,47 @@ app.use(bodyParser({defer: true}));
 
 app.get('/test', function(req, res, next) {
     res.writeHead(200,{"Content-Type":"text/plain","Access-Control-Allow-Origin":"http://localhost"});
-    var otherArray = ["item1", "item2"];
-    var otherObject = { item1: "item1val", item2: "item2val" };
-    var json = JSON.stringify({ 
-        anObject: otherObject, 
-        anArray: otherArray, 
-        another: "item"
-    });
+    // var otherArray = ["item1", "item2"];
+    // var otherObject = { item1: "item1val", item2: "item2val" };
+    // var json = JSON.stringify({ 
+        // anObject: otherObject, 
+        // anArray: otherArray, 
+        // another: "item"
+    // });
     // res.write( json ) ;
     // res.end( );
-    fs.readFile( './img/test.raw' , function( err , data ) {
-        if( err ) throw err ;
-        res.write( data ) ;
-        res.end( ) ;
-    }) ;
+    // fs.readFile( './img/test.raw' , function( err , data ) {
+        // if( err ) throw err ;
+        // res.write( data ) ;
+        // res.end( ) ;
+    // }) ;
+    var filename = "./img/3l8.raw"
+    var width = 4208
+    var height = 3120
+    var filesize = 26257920
+    fs.open(filename, 'r', function(status, fd) {
+        if (status) {
+            console.log(status.message);
+            return;
+        }
+        var buffer = new Buffer( filesize );
+        var rawImage = []
+        fs.read(fd, buffer, 0, filesize , null , function(err, num) {
+            // console.log( buffer ) ;
+            // console.log( buffer[4] | buffer[5]<<8 ) ;
+
+            for( i = 0 ; i < width * height ; i ++ ) {
+                rawImage.push( buffer[i*2] | ( buffer[i*2+1]<<8 ) )
+            }
+            var json = JSON.stringify({ 
+                width : width ,
+                height : height ,
+                rawData: rawImage ,
+            });
+            res.write( json ) ;
+            res.end( ) ;
+        });
+    });
 });
 
 app.route('/upload').post(function (req, res, next) {
